@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <title>Trivia Game</title>
+
+</head>
+
+<body>
+
+
+    <header id="headerDiv"></header>
+    <div id="timerDiv"></div>
+    <div id="questionDiv"></div>
+    <div id="answerDiv"></div>
+    <div id="resetDiv"></div>
+    <div id="winLoosemsgDiv"></div>
+    <div id="showImgDiv"></div>
+
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Script -->
+    <script type="text/javascript">
+        var questions = [
+
+            {
+                "questionText": "What year did the band U2 form?",
+                "answers": ["1979", "1980", "1976"],
+                "correctAns": "1976"
+            }, {
+                "questionText": "What was U2's debut Album",
+                "answers": ["War", "Boy", "The Joshua Tree"],
+                "correctAns": "Boy"
+            }
+
+        ];
+
+        var activeQuestion;
+        var index = -1;
+        var intervalId;
+        var timer;
+        var wins = 0;
+        var losses = 0;
+        var gameCounter = 0;
+
+        $("#header").html("<h1>Totally Trivial Trivia!</h1>");
+
+
+        function showQuestion() {
+            $("#questionDiv").html("");
+            $("#answerDiv").html("");
+            $("timerDiv").html("");
+            $("resetDiv").html("");
+            timer = 10;
+            intervalId = setInterval(decrement, 1000);
+            var timerDiv = $("#timerDiv").html("Time Remaining: " + timer);
+            questions[index].answers.forEach(function (answer) {
+                //initially this worked to show the answers as links
+                // var hrefstring = '<a href="#" class="answerlink">' + answer + '</a>';
+                // $("#answerDiv").append(hrefstring);
+                $("#questionDiv").html(questions[index].questionText);
+                var link = $("<a>");
+                link.attr("href", "#");
+                link.text(answer);
+                link.addClass("answerlink");
+                link.click(function () {
+                    checkAns(answer);
+                })
+                //link.attr("onclick",checkAns(answer));
+                $("#answerDiv").append(link);
+                //$("#answerDiv").on('click', checkAns);
+            });
+        }
+
+
+        function showImg() {
+            $(showImgDiv).html('<img id="theImg" src="assets/images/img1.jpg" alt="the image" />');
+
+            $("#showImgDiv").show();
+            setTimeout(function () {
+                console.log('in timeout');
+                $("#showImgDiv").hide();
+                init();
+            }, 5000);
+
+        }
+
+        function decrement() {
+            timer--;
+            $("#timerDiv").html("Time Remaining: " + timer);
+            console.log("in decrement");
+
+            if (timer === 0) {
+                console.log("time is up ");
+                stop();
+                init();
+
+            }
+
+
+
+        };
+
+
+        function stop() {
+            clearInterval(intervalId);
+
+        };
+
+        function checkAns(answerChosen) {
+            //console.log(event.target.innerHTML);
+            //var answerChosen = event.target.innerHTML;
+            console.log(answerChosen);
+            gameCounter++;
+            console.log("gameCounter is " + gameCounter + "correct ans is " + questions[0].correctAns +
+                "your answer is " + answerChosen);
+
+            if (answerChosen === questions[index].correctAns) {
+                // console.log("corect ans");
+                // $("#");
+                wins++;
+
+                // show image of correct answer for 3 sewconds
+
+                console.log("you win");
+                $("#winLooseMsgDiv").html("You are correct! The Answer is: " + questions[index].correctAns);
+                showImg();
+
+
+            } else {
+                losses++;
+                $("#winLooseMsgDiv").html("Sorry - You are incorrect! The Answer is: " + questions[index].correctAns);
+                showImg();
+
+            }
+
+
+
+
+            // 
+
+            // Add this code when setTimeout working
+            // 
+
+
+            // $(showImgDiv).html('<img id="theImg" src="assets/images/img1.jpg" alt="the image" />').hide()
+            // },3000);
+
+            //         var hidden = $('.hidden');
+            // setTimeout(function(){ 
+            //     $(hidden).hide()
+            // }, 2000);
+
+            stop();
+            //init();
+
+        };
+
+        function reset() {
+
+            console.log("starting over");
+
+            $("#resetDiv").empty();
+            index = -1;
+            wins = 0;
+            losses = 0;
+            init();
+
+
+        };
+
+        function init() {
+
+            if (index === questions.length - 1) {
+                console.log("gamecounter is " + gameCounter + "no more questions!");
+
+                $("#questionDiv").html("All Done! Here's How you Did:");
+                $("#timerDiv").html("");
+                $("#answerDiv").html("Wins: " + wins + " " + "Losses: " + losses);
+
+                $("#resetDiv").html("Start Over?");
+
+                $("#resetDiv").on('click', reset);
+
+
+
+            } else {
+                index++;
+                showQuestion();
+            }
+            console.log("in init");
+
+
+
+
+            // checkAns(answers.question1, "1976", answers.correctAns1);
+
+        };
+
+
+        init();
+
+
+        $(document).ready(function () {
+
+
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>

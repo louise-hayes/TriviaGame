@@ -1,0 +1,24 @@
+/* Trivia css file */
+
+.answerlink {
+    clear: left;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    background-color: red;
+}
+
+a:hover {
+    color: orange;
+}
+
+resetDiv {
+    float: left;
+    height: 30px;
+    padding:10px;
+    margin:10px;
+    width: 100px;
+    background-color: blue;
+    border: none;
+}
