@@ -1,24 +1,85 @@
 /* Trivia css file */
 
+#container {
+    width: 100%;
+}
+
+#headerDiv {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    color: blue;
+}
+
+#startDiv {
+    width: 60%;
+    margin-top: 20%;
+    margin-left: 20%;
+    background: blue;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
 .answerlink {
     clear: left;
     float: left;
     padding: 10px;
-    margin: 10px;
-    color: white;
-    background-color: red;
+    width: 100%;
+    margin-left: 10px;
+    color: black;
+    text-decoration: none;
+    /* background-color: red; */
+    font-size: 36px;
+    cursor: pointer;
 }
 
 a:hover {
     color: orange;
+    background-color: red;
 }
 
-resetDiv {
-    float: left;
-    height: 30px;
-    padding:10px;
-    margin:10px;
-    width: 100px;
+#resetDiv {
+    margin-left: 20%;
+    margin-top: 5%;
     background-color: blue;
-    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+body {
+    /* background-image: url("file:///Users/louise/UNH_Projects/TriviaGame//assets/images/u2live.gif"); */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+    color: White;
+    background-color: yellow;
+}
+
+#answerDiv {
+    margin-left: 20%;
+    width: 70%;
+    background-color: green;
+    text-align: center;
+}
+
+#questionDiv {
+    margin-left: 20%;
+    width: 60%;
+    /* background-color: green; */
+    color: black;
+    font-size: 36px;
+    text-align: center;
+}
+
+#timerDiv {
+    color: red;
+    margin-left: 20%;
+    width: 60%;
+    text-align: center;
+}
+
+#showImgDiv {
+    margin-left: 20%;
+    border-image: 2px solid red;
 }

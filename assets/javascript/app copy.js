@@ -1,4 +1,22 @@
-    
+    var questions = [
+
+        {
+            "questionText": "What year did the band U2 form?",
+            "answers": ["1979", "1980", "1976"],
+            "correctAns": "1976"
+        }, {
+            "questionText": "What was U2's debut Album",
+            "answers": ["War", "Boy", "The Joshua Tree"],
+            "correctAns": "Boy"
+        },
+        {
+            "questionText": "What is Bono's real name",
+            "answers": ["Paul Hewson", "Paul Jewson", "Jaul Pewson"],
+            "correctAns": "Paul Hewson"
+        }
+
+    ];
+
     var activeQuestion;
     var index = -1;
     var intervalId;
@@ -8,21 +26,17 @@
     var gameCounter = 0;
     var clicked = 0;
     var unAnsweredCount = 0;
-    const timePerQuestion = 10;
 
 
 
     function showQuestion() {
         $("#headerDiv").html("<h1>Totally Trivial Trivia!</h1>");
-        $("#questionDiv").empty();
-        $("#answerDiv").empty();
-        $("#timerDiv").empty();
-        $("#resetDiv").empty();
-        $("#startDiv").empty();
+        $("#questionDiv").html("");
+        $("#answerDiv").html("");
+        $("timerDiv").html("");
+        $("resetDiv").html("");
 
-
-
-        timer = timePerQuestion;
+        timer = 10;
         stop();
         intervalId = setInterval(decrement, 1000);
         var timerDiv = $("#timerDiv").html("Time Remaining: " + timer);
@@ -44,15 +58,14 @@
 
             // end of for each
         });
-        // if (clicked === 0) {
-        //     unAnsweredCount++;
-        // };
+        if (clicked === 0) {
+            unAnsweredCount++;
+        };
     };
 
 
     function showImg() {
-        $(showImgDiv).html('<iframe src="' + questions[index].ansGiphy + '" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="' + questions[index].ansGiphyhref +  '">via GIPHY</a></p>');
-       
+        $(showImgDiv).html('<img id="theImg" src="assets/images/img1.jpg" alt="the image" />');
 
         $("#showImgDiv").show();
         setTimeout(function () {
@@ -67,7 +80,6 @@
         $("#timerDiv").html("Time Remaining: " + timer);
         console.log("in decrement");
         if (timer <= 0) {
-            unAnsweredCount++;
             console.log("time is up ");
             stop();
             $("#questionDiv").text("");
@@ -121,7 +133,7 @@
     };
 
     function init() {
-        clicked = 0;
+
         if (index === questions.length - 1) {
 
             $("#questionDiv").html("All Done! Here's How you Did:");
@@ -153,18 +165,13 @@
 
     };
 
-    function start() {
-        $("#headerDiv").html("<h1>Totally Trivial Trivia!</h1>");
-
-        console.log("in start");
-        $("#startDiv").html("START");
-        $("#startDiv").on('click', init);
-
-    };
 
 
 
 
     $(document).ready(function () {
-        start();
+
+        init();
+
+
     });
